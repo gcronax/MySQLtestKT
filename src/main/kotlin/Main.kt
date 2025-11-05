@@ -4,14 +4,17 @@ import java.sql.SQLException
 import java.util.InputMismatchException
 
 // Ruta al archivo de base de datos SQLite
-const val URL_BD = "jdbc:sqlite:src/main/resources/cars.sqlite"
-const val URL_BD_test = "jdbc:sqlite:src/main/resources/cars.sqlite"
+//const val URL_BD = "jdbc:sqlite:src/main/resources/cars.sqlite"
+//const val URL_BD_test = "jdbc:sqlite:src/main/resources/cars.sqlite"
+const val URL_BD ="jdbc:mysql://100.25.144.241:3306/cars"
+const val USER="guille"
+const val PASS="guille"
 
 
 // Obtener conexión
 fun getConnection(): Connection? {
     return try {
-        DriverManager.getConnection(URL_BD)
+        DriverManager.getConnection(URL_BD,USER,PASS)
     } catch (e: SQLException) {
         e.printStackTrace()
         null
