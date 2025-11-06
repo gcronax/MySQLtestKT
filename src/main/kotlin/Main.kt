@@ -336,4 +336,9 @@ fun menuRepuesto() {
 }
 
 
+//funcion sumatorio(precio por cantidad) valor total en una tabla
+//funcion para sacar el id coche con mas potencia
+
+//procedimiento para updatear las ruedas y repuestos a +12
+//procedimento para añadir 100 repuestos por defecto
 
