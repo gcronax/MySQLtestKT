@@ -250,23 +250,28 @@ object RuedasDAO {
             println("No se puede actualizar una rueda sin id.")
             return
         }
-        getConnection()?.use { conn ->
-            conn.prepareStatement(
-                "UPDATE ruedas SET tipo = ?, precio = ?, pulgadas = ?, cantidad = ? WHERE id_rueda = ?"
-            ).use { pstmt ->
-                pstmt.setString(1, rueda.tipo)
-                pstmt.setDouble(2, rueda.precio)
-                pstmt.setDouble(3, rueda.pulgadas)
-                pstmt.setInt(4, rueda.cantidad)
-                pstmt.setInt(5, rueda.id_rueda)
-                val filas = pstmt.executeUpdate()
-                if (filas > 0) {
-                    println("Rueda con id=${rueda.id_rueda} actualizado con éxito.")
-                } else {
-                    println("No se encontró ninguna rueda con id=${rueda.id_rueda}.")
+        if (consultarRuedaPorId(rueda.id_rueda)==rueda){
+            getConnection()?.use { conn ->
+                conn.prepareStatement(
+                    "UPDATE ruedas SET tipo = ?, precio = ?, pulgadas = ?, cantidad = ? WHERE id_rueda = ?"
+                ).use { pstmt ->
+                    pstmt.setString(1, rueda.tipo)
+                    pstmt.setDouble(2, rueda.precio)
+                    pstmt.setDouble(3, rueda.pulgadas)
+                    pstmt.setInt(4, rueda.cantidad)
+                    pstmt.setInt(5, rueda.id_rueda)
+                    val filas = pstmt.executeUpdate()
+                    if (filas > 0) {
+                        println("Rueda con id=${rueda.id_rueda} actualizado con éxito.")
+                    } else {
+                        println("No se encontró ninguna rueda con id=${rueda.id_rueda}.")
+                    }
                 }
-            }
-        } ?: println("No se pudo establecer la conexión.")
+            } ?: println("No se pudo establecer la conexión.")
+        }else{
+            println("Dicho id no existe")
+        }
+
     }
 
     fun eliminarRueda(id: Int) {
