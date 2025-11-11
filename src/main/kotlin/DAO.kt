@@ -213,7 +213,7 @@ object RuedasDAO {
     fun consultarRuedaPorId(id: Int): Rueda? {
         var rueda: Rueda? = null
         getConnection()?.use { conn ->
-            conn.prepareStatement("SELECT * FROM coches WHERE id_rueda = ?").use { pstmt ->
+            conn.prepareStatement("SELECT * FROM ruedas WHERE id_rueda = ?").use { pstmt ->
                 pstmt.setInt(1, id)
                 val rs = pstmt.executeQuery()
                 if (rs.next()) {
@@ -250,27 +250,24 @@ object RuedasDAO {
             println("No se puede actualizar una rueda sin id.")
             return
         }
-        if (consultarRuedaPorId(rueda.id_rueda)==rueda){
-            getConnection()?.use { conn ->
-                conn.prepareStatement(
-                    "UPDATE ruedas SET tipo = ?, precio = ?, pulgadas = ?, cantidad = ? WHERE id_rueda = ?"
-                ).use { pstmt ->
-                    pstmt.setString(1, rueda.tipo)
-                    pstmt.setDouble(2, rueda.precio)
-                    pstmt.setDouble(3, rueda.pulgadas)
-                    pstmt.setInt(4, rueda.cantidad)
-                    pstmt.setInt(5, rueda.id_rueda)
-                    val filas = pstmt.executeUpdate()
-                    if (filas > 0) {
-                        println("Rueda con id=${rueda.id_rueda} actualizado con éxito.")
-                    } else {
-                        println("No se encontró ninguna rueda con id=${rueda.id_rueda}.")
-                    }
+        getConnection()?.use { conn ->
+            conn.prepareStatement(
+                "UPDATE ruedas SET tipo = ?, precio = ?, pulgadas = ?, cantidad = ? WHERE id_rueda = ?"
+            ).use { pstmt ->
+                pstmt.setString(1, rueda.tipo)
+                pstmt.setDouble(2, rueda.precio)
+                pstmt.setDouble(3, rueda.pulgadas)
+                pstmt.setInt(4, rueda.cantidad)
+                pstmt.setInt(5, rueda.id_rueda)
+                val filas = pstmt.executeUpdate()
+                if (filas > 0) {
+                    println("Rueda con id=${rueda.id_rueda} actualizado con éxito.")
+                } else {
+                    println("No se encontró ninguna rueda con id=${rueda.id_rueda}.")
                 }
-            } ?: println("No se pudo establecer la conexión.")
-        }else{
-            println("Dicho id no existe")
-        }
+            }
+        } ?: println("No se pudo establecer la conexión.")
+
 
     }
 
@@ -348,7 +345,7 @@ object RepuestoDAO {
 
     fun actualizarRepuesto(repuesto: Repuesto) {
         if (repuesto.id_repuesto == null) {
-            println("No se puede actualizar una planta sin id.")
+            println("No se puede actualizar un repuesto sin id.")
             return
         }
         getConnection()?.use { conn ->

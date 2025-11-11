@@ -1,3 +1,4 @@
+import RuedasDAO.consultarRuedaPorId
 import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.SQLException
@@ -276,7 +277,10 @@ fun menuRueda() {
                 4 -> {
                     print("Dame el id de la rueda a actualizar: ")
                     val id: Int = readLine()?.toIntOrNull() ?: 0
-                    print("tipo a modificar: ")
+//                    if (consultarRuedaPorId(id)){
+//
+//                    }
+                        print("tipo a modificar: ")
                     val tipo: String = readLine().orEmpty()
                     print("precio(Double) a modificar: ")
                     val precio: Double = readLine()?.toDoubleOrNull() ?: 0.0
