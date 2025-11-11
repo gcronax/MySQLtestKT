@@ -35,8 +35,10 @@ fun main() {
         println("2. Menu Ruedas")
         println("3. Menu Repuestos")
         println("4. Transaccion crear coche")
-        println("5. Salir")
-
+        println("5. Menu funciones de consulta")
+        println("6. Procedimiento para listar coches")
+        println("7. Procedimiento para suministrar ruedas")
+        println("8. Salir")
         try {
             val select: Int = readLine()?.toIntOrNull() ?: 0
             when (select) {
@@ -68,7 +70,13 @@ fun main() {
                     CochesDAO.crearCoche(Coche(modelo = modelo, marca = marca, consumo = consumo, hp = hp ),ruedaID)
 
                 }
-                5 -> {
+                6 -> {
+                    print("Dame la potencia minima, para listar coches mayorres a dicha potencia: ")
+                    val potencia: Int = readLine()?.toIntOrNull() ?: 0
+                    listar_coches_de_mayor_potencia(potencia)
+                }
+
+                8 -> {
                     itera = false
                 }
 
