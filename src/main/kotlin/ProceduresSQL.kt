@@ -65,11 +65,7 @@ fun suministrar_mas_ruedas(ruedas:Int){
         conn.prepareCall(sql).use { call ->
             call.setInt(1, ruedas)
 
-            call.executeQuery().use { rs ->
-                if (rs.next()) {
-                    println("Modificación completada.")
-                }
-            }
+            call.executeQuery().use {}
         }
     }
 }

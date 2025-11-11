@@ -75,6 +75,11 @@ fun main() {
                     val potencia: Int = readLine()?.toIntOrNull() ?: 0
                     listar_coches_de_mayor_potencia(potencia)
                 }
+                7 -> {
+                    print("Dame el número de ruedas que quieras suministrar: ")
+                    val ruedas: Int = readLine()?.toIntOrNull() ?: 0
+                    suministrar_mas_ruedas(ruedas)
+                }
 
                 8 -> {
                     itera = false
