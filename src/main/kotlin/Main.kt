@@ -1,4 +1,3 @@
-import RuedasDAO.consultarRuedaPorId
 import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.SQLException
@@ -21,7 +20,6 @@ fun getConnection(): Connection? {
 }
 
 fun main() {
-
     var itera = true
     do {
         println()
@@ -55,9 +53,9 @@ fun main() {
                     print("ID del tipo de rueda a usar: ")
                     val ruedaID: Int = isInt()
                     print("Nombre del modelo para el nuevo coche: ")
-                    val modelo: String = readLine().orEmpty()
+                    val modelo: String = isString()
                     print("Nombre de la marca para el nuevo coche: ")
-                    val marca: String = readLine().orEmpty()
+                    val marca: String = isString()
                     print("Consumo(Double) para el nuevo coche: ")
                     val consumo: Double = isDouble()
                     print("Potencia para el nuevo coche: ")
@@ -114,20 +112,32 @@ fun menuFunciones() {
             val select: Int = isInt()
             when (select) {
                 1 -> {
+                    print("Dame el id para obtener el valor: ")
+                    val id: Int = isInt()
+                    if (RepuestoDAO.comprobarRepuestoPorId(id)){
+                        valorRepuestoID(id)
+                    }else{
+                        println("Id no existe")
+                    }
 
                 }
                 2 -> {
-
+                    print("Dame el id para obtener el valor: ")
+                    val id: Int = isInt()
+                    if (RuedasDAO.comprobarRuedaPorId(id)){
+                        valorRuedaID(id)
+                    }else{
+                        println("Id no existe")
+                    }
 
                 }
                 3 -> {
-
-
+                    println("Valor total de la taba repuestos")
+                    valorTablaRepuestos()
                 }
                 4 -> {
-
-
-
+                    println("Valor total de la taba ruedas")
+                    valorTablaRuedas()
                 }
                 5 -> {
                     itera = false
@@ -170,16 +180,21 @@ fun menuCoche() {
                 2 -> {
                     print("Dame el id: ")
                     val id: Int = isInt()
-                    val Coche=CochesDAO.consultarCochePorId(id)
-                    println(" - id -> [${Coche?.id_coche}] modelo:${Coche?.modelo}, marca:${Coche?.marca}, consuo:${Coche?.consumo}, potencia:${Coche?.hp} ")
+                    if (CochesDAO.comprobarCochePorId(id)){
+                        val coche=CochesDAO.consultarCochePorId(id)
+                        println(" - id -> [${coche?.id_coche}] modelo:${coche?.modelo}, marca:${coche?.marca}, consuo:${coche?.consumo}, potencia:${coche?.hp} ")
+                    }else{
+                        println("Id no existe")
+                    }
+
 
 
                 }
                 3 -> {
                     print("Nombre del modelo para el nuevo coche: ")
-                    val modelo: String = readLine().orEmpty()
+                    val modelo: String = isString()
                     print("Nombre de la marca para el nuevo coche: ")
-                    val marca: String = readLine().orEmpty()
+                    val marca: String = isString()
                     print("Consumo(Double) para el nuevo coche: ")
                     val consumo: Double = isDouble()
                     print("Potencia para el nuevo coche: ")
@@ -192,9 +207,9 @@ fun menuCoche() {
                     val id: Int = isInt()
                     if (CochesDAO.comprobarCochePorId(id)){
                         print("Nombre del modelo a modificar: ")
-                        val modelo: String = readLine().orEmpty()
+                        val modelo: String = isString()
                         print("Nombre de la marca a modificar: ")
-                        val marca: String = readLine().orEmpty()
+                        val marca: String = isString()
                         print("Consumo(Double) a modificar: ")
                         val consumo: Double = isDouble()
                         print("Potencia a modificar: ")
@@ -258,13 +273,19 @@ fun menuRueda() {
                 2 -> {
                     print("Dame el id: ")
                     val id: Int = isInt()
-                    val Rueda=RuedasDAO.consultarRuedaPorId(id)
-                    println(" - id -> [${Rueda?.id_rueda}] tipo:${Rueda?.tipo}, precio:${Rueda?.precio}, pulgadas:${Rueda?.pulgadas}, cantidad:${Rueda?.cantidad} ")
+                    if (RuedasDAO.comprobarRuedaPorId(id)){
+                        val rueda=RuedasDAO.consultarRuedaPorId(id)
+                        println(" - id -> [${rueda?.id_rueda}] tipo:${rueda?.tipo}, precio:${rueda?.precio}, pulgadas:${rueda?.pulgadas}, cantidad:${rueda?.cantidad} ")
+                    }else{
+                        println("Id no existe")
+                    }
+
+
 
                 }
                 3 -> {
                     print("Nombre del tipo para la nueva rueda: ")
-                    val tipo: String = readLine().orEmpty()
+                    val tipo: String = isString()
                     print("Precio(Double) para la nueva rueda: ")
                     val precio: Double = isDouble()
                     print("Pulgadas(Double) para la nueva rueda: ")
@@ -280,7 +301,7 @@ fun menuRueda() {
                     val id: Int = isInt()
                     if (RuedasDAO.comprobarRuedaPorId(id)){
                         print("tipo a modificar: ")
-                        val tipo: String = readLine().orEmpty()
+                        val tipo: String = isString()
                         print("precio(Double) a modificar: ")
                         val precio: Double = isDouble()
                         print("pulgadas(Double) a modificar: ")
@@ -307,7 +328,7 @@ fun menuRueda() {
                 }
 
                 else -> {
-                    println("Opcion no valida. Por favor, selecciona una opcion del 1 al 5.")
+                    println("Opcion no valida. Por favor, selecciona una opcion del 1 al 6.")
                 }
             }
 
@@ -339,24 +360,28 @@ fun menuRepuesto() {
                 1 -> {
                     println("Lista de repuestos:")
                     RepuestoDAO.listarRepuestos().forEach {
-                        println(" - id -> [${it.id_repuesto}] localizacion:${it.localizacion}, precio:${it.precio}, cantidad:${it.cantidad}, nombre:${it.nombre} ")
+                        println(" - id -> [${it.id_repuesto}] localización:${it.localizacion}, precio:${it.precio}, cantidad:${it.cantidad}, nombre:${it.nombre} ")
                     }
                 }
                 2 -> {
                     print("Dame el id: ")
                     val id: Int = isInt()
-                    val repuesto = RepuestoDAO.consultarRepuestoPorId(id)
-                    println(" - id -> [${repuesto?.id_repuesto}] localizacion:${repuesto?.localizacion}, precio:${repuesto?.precio}, cantidad:${repuesto?.cantidad}, nombre:${repuesto?.nombre} ")
+                    if (RepuestoDAO.comprobarRepuestoPorId(id)){
+                        val repuesto = RepuestoDAO.consultarRepuestoPorId(id)
+                        println(" - id -> [${repuesto?.id_repuesto}] localizaciónn:${repuesto?.localizacion}, precio:${repuesto?.precio}, cantidad:${repuesto?.cantidad}, nombre:${repuesto?.nombre} ")
+                    }else{
+                        println("Id no existe")
+                    }
                 }
                 3 -> {
                     print("localizacion del nuevo repuesto: ")
-                    val localizacion: String = readLine().orEmpty()
+                    val localizacion: String = isString()
                     print("Precio(Double) para la nuevo repuesto: ")
                     val precio: Double = isDouble()
                     print("Cantidad para la nuevo repuesto: ")
                     val cantidad: Int = isInt()
                     print("nombre del nuevo repuesto: ")
-                    val nombre: String = readLine().orEmpty()
+                    val nombre: String = isString()
                     RepuestoDAO.insertarRepuesto(Repuesto(localizacion = localizacion,
                         precio = precio, cantidad = cantidad, nombre = nombre ))
 
@@ -366,13 +391,13 @@ fun menuRepuesto() {
                     val id: Int = isInt()
                     if (RepuestoDAO.comprobarRepuestoPorId(id)){
                         print("localizacion a modificar: ")
-                        val localizacion: String = readLine().orEmpty()
+                        val localizacion: String = isString()
                         print("Precio(Double) a modificar: ")
                         val precio: Double = isDouble()
                         print("Cantidad a modificar: ")
                         val cantidad: Int = isInt()
                         print("nombre a modificar: ")
-                        val nombre: String = readLine().orEmpty()
+                        val nombre: String = isString()
                         RepuestoDAO.actualizarRepuesto(Repuesto(id, localizacion = localizacion,
                             precio = precio, cantidad = cantidad ,nombre=nombre))
                     }else{
@@ -393,7 +418,7 @@ fun menuRepuesto() {
                 }
 
                 else -> {
-                    println("Opcion no valida. Por favor, selecciona una opcion del 1 al 5.")
+                    println("Opcion no valida. Por favor, selecciona una opcion del 1 al 6.")
                 }
             }
 
@@ -428,7 +453,7 @@ fun isDouble(): Double{
 fun isString(): String{
     while (true){
         val entrada=readln()
-        if (entrada.isEmpty()){
+        if (entrada.isBlank()){
             println("Dame un string valido")
         }else{
             return entrada
