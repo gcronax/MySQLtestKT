@@ -132,6 +132,21 @@ object CochesDAO {
         } ?: println("No se pudo establecer la conexión.")
         return coche
     }
+    fun comprobarCochePorId(id: Int): Boolean {
+        var cocheExist = false
+        getConnection()?.use { conn ->
+            conn.prepareStatement("SELECT * FROM coches WHERE id_coche = ?").use { pstmt ->
+                pstmt.setInt(1, id)
+                val rs = pstmt.executeQuery()
+                if (rs.next()) {
+                    if (rs.getInt("id_coche")==id){
+                        cocheExist=true
+                    }
+                }
+            }
+        } ?: println("No se pudo establecer la conexión.")
+        return cocheExist
+    }
 
     fun insertarCoche(coche: Coche) {
         getConnection()?.use { conn ->
@@ -228,6 +243,21 @@ object RuedasDAO {
             }
         } ?: println("No se pudo establecer la conexión.")
         return rueda
+    }
+    fun comprobarRuedaPorId(id: Int): Boolean {
+        var ruedaExist = false
+        getConnection()?.use { conn ->
+            conn.prepareStatement("SELECT * FROM ruedas WHERE id_rueda = ?").use { pstmt ->
+                pstmt.setInt(1, id)
+                val rs = pstmt.executeQuery()
+                if (rs.next()) {
+                    if (id==rs.getInt("id_rueda")){
+                        ruedaExist= true
+                    }
+                }
+            }
+        } ?: println("No se pudo establecer la conexión.")
+        return ruedaExist
     }
 
     fun insertarRueda(rueda: Rueda) {
@@ -326,6 +356,21 @@ object RepuestoDAO {
             }
         } ?: println("No se pudo establecer la conexión.")
         return repuesto
+    }
+    fun comprobarRepuestoPorId(id: Int): Boolean {
+        var repuestoExist=false
+        getConnection()?.use { conn ->
+            conn.prepareStatement("SELECT * FROM repuestos WHERE id_repuesto = ?").use { pstmt ->
+                pstmt.setInt(1, id)
+                val rs = pstmt.executeQuery()
+                if (rs.next()) {
+                    if (rs.getInt("id_repuesto")==id){
+                        repuestoExist=true
+                    }
+                }
+            }
+        } ?: println("No se pudo establecer la conexión.")
+        return repuestoExist
     }
 
     fun insertarRepuesto(repuesto: Repuesto) {
