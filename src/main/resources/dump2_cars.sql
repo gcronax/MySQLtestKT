@@ -23,12 +23,13 @@ DROP TABLE IF EXISTS `coches`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `coches` (
-  `id_coche` int DEFAULT NULL,
+  `id_coche` int NOT NULL AUTO_INCREMENT,
   `modelo` varchar(50) DEFAULT NULL,
   `marca` varchar(50) DEFAULT NULL,
   `consumo` double DEFAULT NULL,
-  `hp` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `hp` int DEFAULT NULL,
+  PRIMARY KEY (`id_coche`)
+) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +38,7 @@ CREATE TABLE `coches` (
 
 LOCK TABLES `coches` WRITE;
 /*!40000 ALTER TABLE `coches` DISABLE KEYS */;
-INSERT INTO `coches` VALUES (10,'Model S','Tesla',15,670),(11,'Civic','Honda',6.5,158),(12,'Corolla','Toyota',7,132),(13,'Mustang','Ford',9.5,450),(14,'Impreza','Subaru',8.5,152),(15,'Golf','Volkswagen',7.5,147),(16,'Altima','Nissan',7.8,188),(17,'A4','Audi',8.3,201),(18,'CX-5','Mazda',9,187),(19,'F-150','Ford',12.5,290),(20,'Model 3','Tesla',13.5,480),(21,'Sentra','Nissan',7.2,124),(22,'Camry','Toyota',7.4,203),(23,'Accord','Honda',7,192),(24,'Q5','Audi',9.2,248),(25,'Escape','Ford',8.8,181),(26,'Mazda3','Mazda',7.8,186),(27,'Tucson','Hyundai',8.7,161),(28,'Elantra','Hyundai',6.9,147),(29,'RAV4','Toyota',8,203),(30,'Wrangler','Jeep',11.5,285),(31,'Charger','Dodge',10.5,292),(32,'Explorer','Ford',10,300),(33,'Impreza','Subaru',8.2,152),(34,'Soul','Kia',7.6,147),(35,'A3','Audi',7.7,184),(36,'C-Class','Mercedes-Benz',8.4,255),(37,'Taurus','Ford',9.8,288),(38,'Fusion','Ford',8.5,175),(39,'Jetta','Volkswagen',7.2,147),(40,'Veloster','Hyundai',7,147),(41,'Altima','Nissan',7.7,182),(42,'Camaro','Chevrolet',11,275),(43,'Model X','Tesla',18,670),(44,'Golf','Volkswagen',7.4,147),(45,'Rogue','Nissan',8.6,170),(46,'Sonata','Hyundai',7.5,191),(47,'Prius','Toyota',4.5,121),(48,'CX-9','Mazda',9.8,250),(49,'Tundra','Toyota',12.2,381),(50,'A6','Audi',8.8,248),(51,'M3','BMW',10.5,473),(52,'Silverado','Chevrolet',13,355),(53,'X5','BMW',10.2,335),(54,'Sentra','Nissan',7.1,124),(55,'Explorer','Ford',9.7,300),(56,'Tiguan','Volkswagen',8.3,184),(57,'Civic','Honda',6.8,158),(58,'F-150','Ford',13,290),(59,'modelo','marca',8.8,3),(60,'modelo','marca',8.8,300),(61,'modeloprueba','marcaprueba',1.1,1),(62,'m','m',4.4,4);
+INSERT INTO `coches` VALUES (10,'Model S','Tesla',15,670),(11,'Civic','Honda',6.5,158),(12,'Corolla','Toyota',7,132),(13,'Mustang','Ford',9.5,450),(14,'Impreza','Subaru',8.5,152),(15,'Golf','Volkswagen',7.5,147),(16,'Altima','Nissan',7.8,188),(17,'A4','Audi',8.3,201),(18,'CX-5','Mazda',9,187),(19,'F-150','Ford',12.5,290),(20,'Model 3','Tesla',13.5,480),(21,'Sentra','Nissan',7.2,124),(22,'Camry','Toyota',7.4,203),(23,'Accord','Honda',7,192),(24,'Q5','Audi',9.2,248),(25,'Escape','Ford',8.8,181),(26,'Mazda3','Mazda',7.8,186),(27,'Tucson','Hyundai',8.7,161),(28,'Elantra','Hyundai',6.9,147),(29,'RAV4','Toyota',8,203),(30,'Wrangler','Jeep',11.5,285),(31,'Charger','Dodge',10.5,292),(32,'Explorer','Ford',10,300),(33,'Impreza','Subaru',8.2,152),(34,'Soul','Kia',7.6,147),(35,'A3','Audi',7.7,184),(36,'C-Class','Mercedes-Benz',8.4,255),(37,'Taurus','Ford',9.8,288),(38,'Fusion','Ford',8.5,175),(39,'Jetta','Volkswagen',7.2,147),(40,'Veloster','Hyundai',7,147),(41,'Altima','Nissan',7.7,182),(42,'Camaro','Chevrolet',11,275),(43,'Model X','Tesla',18,670),(44,'Golf','Volkswagen',7.4,147),(45,'Rogue','Nissan',8.6,170),(46,'Sonata','Hyundai',7.5,191),(47,'Prius','Toyota',4.5,121),(48,'CX-9','Mazda',9.8,250),(49,'Tundra','Toyota',12.2,381),(50,'A6','Audi',8.8,248),(51,'M3','BMW',10.5,473),(52,'Silverado','Chevrolet',13,355),(53,'X5','BMW',10.2,335),(54,'Sentra','Nissan',7.1,124),(55,'Explorer','Ford',9.7,300),(56,'Tiguan','Volkswagen',8.3,184),(57,'Civic','Honda',6.8,158),(58,'F-150','Ford',13,290),(59,'modelo','marca',8.8,3),(60,'modelo','marca',8.8,300),(61,'modeloprueba','marcaprueba',1.1,1),(62,'rav4','toyota',3,500),(117,'pruebamodelo','pruebamarca',44,44);
 /*!40000 ALTER TABLE `coches` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -49,12 +50,13 @@ DROP TABLE IF EXISTS `repuestos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `repuestos` (
-  `id_repuesto` int DEFAULT NULL,
+  `id_repuesto` int NOT NULL AUTO_INCREMENT,
   `localizacion` varchar(50) DEFAULT NULL,
   `precio` double DEFAULT NULL,
   `cantidad` int DEFAULT NULL,
-  `nombre` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `nombre` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id_repuesto`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -75,12 +77,13 @@ DROP TABLE IF EXISTS `ruedas`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ruedas` (
-  `id_rueda` int DEFAULT NULL,
+  `id_rueda` int NOT NULL AUTO_INCREMENT,
   `tipo` varchar(50) DEFAULT NULL,
   `precio` double DEFAULT NULL,
   `pulgadas` double DEFAULT NULL,
-  `cantidad` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `cantidad` int DEFAULT NULL,
+  PRIMARY KEY (`id_rueda`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -89,7 +92,7 @@ CREATE TABLE `ruedas` (
 
 LOCK TABLES `ruedas` WRITE;
 /*!40000 ALTER TABLE `ruedas` DISABLE KEYS */;
-INSERT INTO `ruedas` VALUES (2,'Todo Terreno',6,5,10),(3,'De carrera',60,18,24),(4,'Off-road',70.2,16.2,24),(5,'Invierno',55.3,17.8,24),(6,'Verano',48.75,16.5,24),(7,'All-season',52.1,15,24),(8,'De montaña',65,19.4,24),(9,'Compacta',40,14.7,24),(10,'Neumático',38.9,14.3,24),(11,'De bici',30,12.6,24),(12,'De moto',50,16.8,24),(13,'De coche',55,17.9,24),(14,'De competición',80,18.4,24),(15,'De nieve',60.5,17.2,24),(16,'De carretera',45,16.1,24),(17,'Resistente',70,19.7,24),(18,'Ligera',42.5,15.4,24),(19,'De tracción',58,17.6,24),(20,'De paseo',35,14.9,20),(21,'De alta performance',75,18.3,20);
+INSERT INTO `ruedas` VALUES (2,'Todo Terreno',6,5,22),(3,'De carrera',60,18,36),(4,'Off-road',70.2,16.2,36),(5,'Invierno',55.3,17.8,36),(6,'Verano',48.75,16.5,36),(7,'All-season',52.1,15,36),(8,'De montaña',65,19.4,36),(9,'Compacta',40,14.7,36),(10,'Neumático',38.9,14.3,36),(11,'De bici',30,12.6,36),(12,'De moto',50,16.8,36),(13,'De coche',55,17.9,36),(14,'De competición',80,18.4,36),(15,'De nieve',60.5,17.2,36),(16,'De carretera',45,16.1,36),(17,'Resistente',70,19.7,36),(18,'Ligera',42.5,15.4,36),(19,'De tracción',58,17.6,36),(20,'De paseo',35,14.9,32),(21,'De alta performance',75,18.3,32);
 /*!40000 ALTER TABLE `ruedas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -258,4 +261,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-11-12  8:31:19
+-- Dump completed on 2025-11-12  9:35:41

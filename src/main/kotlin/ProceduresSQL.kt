@@ -65,7 +65,7 @@ fun suministrar_mas_ruedas(ruedas:Int){
         conn.prepareCall(sql).use { call ->
             call.setInt(1, ruedas)
 
-            call.executeQuery().use {}
+            call.executeQuery().use {println("ruedas actualizadas a $ruedas")}
         }
     }
 }
